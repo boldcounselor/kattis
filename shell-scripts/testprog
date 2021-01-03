@@ -1,0 +1,8 @@
+echo -e "Compiling..."
+compile $1
+echo -e "\nInput"
+cat $KATTIS/input/$1/$2.in
+echo -e "\nProgram output"
+$KATTIS/solving/$1 < $KATTIS/input/$1/$2.in
+echo -e "\nActual output"
+cat $KATTIS/input/$1/$2.ans

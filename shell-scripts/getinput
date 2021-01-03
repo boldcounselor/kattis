@@ -1,0 +1,3 @@
+wget https://open.kattis.com/problems/$1/file/statement/samples.zip -P $KATTIS/input 
+unzip $KATTIS/input/samples.zip -d $KATTIS/input/$1/
+rm $KATTIS/input/samples.zip

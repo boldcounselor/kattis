@@ -8,3 +8,5 @@
 !*/
 
 /.vscode
+/input
+!shell-scripts/*

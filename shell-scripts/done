@@ -1,0 +1,1 @@
+mv $KATTIS/solving/$1.cpp $KATTIS/solved/$1.cpp

@@ -1,0 +1,2 @@
+cp $KATTIS/templates/template.cpp $KATTIS/solving/$1.cpp
+getinput $1

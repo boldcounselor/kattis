@@ -1,0 +1,1 @@
+g++ -o $KATTIS/solving/$1 $KATTIS/solving/$1.cpp -g -O2 -std=gnu++17 -static
