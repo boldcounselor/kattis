@@ -25,8 +25,8 @@ int main()
     }
     // find bottom right corner that gives best flies killed
     int bestVal = 0, bestX, bestY;
-    for(int i = k; i<=r+1; i++){
-        for(int j = k; j<=s+1; j++){
+    for(int i = k; i<r+1; i++){
+        for(int j = k; j<s+1; j++){
             int testVal = prefix[i-1][j-1] + prefix[i-1-(k-2)][j-1-(k-2)] - prefix[i-1][j-1-(k-2)] -prefix[i-1-(k-2)][j-1];
             if(testVal>bestVal){
                 bestVal=testVal;
@@ -35,7 +35,7 @@ int main()
             }
         }
     }
-    cout << bestVal;
+    cout << bestVal << "\n";
     for(int i = k-1; i>=0; i--){
         picture[bestX-1-i][bestY-1] = '|';
         picture[bestX-1-i][bestY-1-(k-1)] = '|';
