@@ -25,7 +25,7 @@ int main()
         }
         sort(s.begin(),s.end());
         int sum = accumulate(s.begin(),s.end(), 0);
-        int avg = sum/s.size();
+        int avg = sum/s.size()+1;
         int no = s.end() - lower_bound(s.begin(),s.end(), avg);
         cout << fixed;
         cout << setprecision(3);
