@@ -12,7 +12,7 @@ double length(int size){
 
 double make_paper(int amt, int size){
     int idx = size - 2;
-   int addtl_req = amt - shts[idx];
+    int addtl_req = amt - shts[idx];
     //if ask for too small, just break;
     if(size > n){
         return -std::numeric_limits<double>::infinity();
@@ -38,6 +38,7 @@ int main()
         shts.push_back(input);
     }
     double tape_used = length(2) + make_paper(2, 2);
+    cout.precision(15);
     if(tape_used < 0){
         cout << "impossible\n";
     }
