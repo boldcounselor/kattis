@@ -19,8 +19,8 @@ int main()
             string name;
             int num;
             iss >> name >> num;
-            mem_s2i[name] = num;
             mem_i2s[num] = name;
+            mem_s2i[name] = num;
         }
         else if(comm == "calc"){
             string input;
@@ -30,7 +30,7 @@ int main()
             input.replace(0,1,""); //get rid of leading whitespace
             istringstream inp(input);
             cout << input;
-            int sign;
+            int sign = 1;
             while(inp >> read){
                 if(read == "+"){
                     sign = 1;
