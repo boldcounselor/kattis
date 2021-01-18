@@ -40,5 +40,8 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
+    uint32 k, m, n;
+    cin >> k >> m >> n;
+    cout << ((k%(m+n) + 1) > m ? "Alex\n": "Barb\n");
     return 0;
 }

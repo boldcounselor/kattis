@@ -40,5 +40,8 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
+    double A, N;
+    cin >> A >> N;
+    cout << (N>=sqrt(4*M_PI*A)?"Diablo is happy!\n":"Need more materials!\n");
     return 0;
 }

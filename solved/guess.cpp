@@ -32,13 +32,29 @@ typedef vector<vi> vvi;
 typedef long int int32;
 typedef unsigned long int uint32;
 typedef long long int int64;
-typedef unsigned long long int  uint64;
+typedef unsigned long long int uint64;
 
 //template ends
 
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    int s = 1;
+    int e = 1000;
+    string input;
+    while(true)
+    {
+        int guess = (s+e)/2;
+        cout << guess << endl << flush;
+        cin >> input;
+        if(input == "lower"){
+            e = guess-1;
+        }
+        else if (input == "higher"){
+            s = guess+1;
+        }
+        else if (input == "correct"){
+            break;
+        }
+    }
     return 0;
 }

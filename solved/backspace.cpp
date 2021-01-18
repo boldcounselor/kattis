@@ -40,5 +40,21 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
+    char input;
+    deque<char> output;
+    string line;
+    getline(cin, line);
+    for(char input : line){
+        if(input=='<'){
+            output.pop_back();
+        }
+        else{
+            output.push_back(input);
+        }
+    }
+    while(!output.empty()){
+        cout << output.front();
+        output.pop_front();
+    }
     return 0;
 }
