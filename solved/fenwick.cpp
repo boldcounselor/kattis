@@ -95,7 +95,7 @@ int main()
         if (comm == '+')
         {
             cin >> a >> b;
-            ft.add(a, b);
+            ft.add(a+1, b);
         }
         else if (comm == '?')
         {
