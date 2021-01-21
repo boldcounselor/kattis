@@ -16,6 +16,12 @@ typedef long long int ll;
 typedef unsigned long long int  ull;
 
 //template ends
+bool cmp(pair<int, int> lhs, pair<int, int> rhs) {
+    if(lhs.second == rhs.second) {
+        return lhs.first < rhs.first;
+    }
+    return lhs.second < rhs.second;
+}
 
 int main()
 {
@@ -30,21 +36,15 @@ int main()
         cin >> a >> b;
         ranges[i] = {a, b};
     }
-    sort(ranges.begin(), ranges.end(), [](auto &left, auto&right){return left.first < right.first;});
-    stack<pii> range_stack;
-    //figure out how to access fro m1 onwards
-    //figure out how overlapping interval merge works
-    range_stack.push(*ranges.begin());
-    for(vii::iterator it = ++ranges.begin(); it != ranges.end(); it++){
-        if((*it).first <= range_stack.top().second | (*it).second <= range_stack.top().first){
-            if(range_stack.top().second < (*it).second){
-                range_stack.top().second = (*it).second;
-            }
-        }
-        else{
-            range_stack.push((*it));
+    sort(ranges.begin(), ranges.end(), cmp);
+    int counter = 1;
+    int end = ranges[0].second;
+    for(int i = 0; i < ranges.size(); i++){
+        if(ranges[i].first > end){
+            end = ranges[i].second;
+            counter++;
         }
     }
-    cout << range_stack.size();
+    cout << counter; 
     return 0;
 }
