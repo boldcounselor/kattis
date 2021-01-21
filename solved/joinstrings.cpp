@@ -3,7 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include <sstream>
-#include <queue>
+#include <vector>
 #include <deque>
 #include <bitset>
 #include <iterator>
@@ -21,7 +21,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <assert.h>
-
+#include <unordered_set>
 using namespace std;
 
 typedef pair<int, int> pii;
@@ -35,33 +35,38 @@ typedef long long int int64;
 typedef unsigned long long int uint64;
 
 //template ends
-int cost(char a, char b){
-    if (a==b){
-        return 0;
-    }
-    else{
-        return 1;
+vector<vector<int>> instructions;
+vector<string> strs;
+
+void coutRecurs(int n){
+    cout << strs[n];
+    for(auto i : instructions[n]){
+        coutRecurs(i);
     }
 }
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
+    int N;
+    cin >> N;
+    unordered_set<int> head;
+    strs.reserve(N + 1);
+    instructions.resize(N+1, vector<int>());
     string input;
-    string output = "abcdefghijklmnopqrstuvwxyz";
-    cin >> input;
-    vector<vector<int>> dp(input.length() + 1, vector<int>(output.length() + 1, 0));
-    for (int i = 1; i <= output.length(); i++)
+    for (int i = 1; i < N + 1; i++)
     {
-        dp[0][i] = i;
+        cin >> input;
+        strs[i] = input;
+        head.insert(i);
     }
-    for (int i = 1; i <= input.length(); i++)
+    int a, b;
+    for (int i = 1; i < N; i++)
     {
-        for (int j = 1; j <= output.length(); j++)
-        {
-            dp[i][j] = min(min(dp[i][j - 1] + 1, dp[i - 1][j]), dp[i - 1][j - 1] + cost(input[i],output[j]));
-        }
+        cin >> a >> b;
+        instructions[a].push_back(b);
+        head.erase(b);
     }
-    cout << dp[input.length()][output.length()];
+    coutRecurs(*head.begin());
     return 0;
 }
