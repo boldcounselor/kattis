@@ -1,4 +1,5 @@
-//https://cp-algorithms.com/data_structures/fenwick.html
+//adapted from https://cp-algorithms.com/data_structures/fenwick.html and competitive programmers handbook
+//1-indexed
 struct FenwickTree
 {
     vector<int> bit; // binary indexed tree
