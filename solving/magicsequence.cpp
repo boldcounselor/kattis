@@ -30,40 +30,39 @@ int main()
         cin >> n;
         cin >> a >> b >> c;
         cin >> x >> y;
-        vector<ull> seq;
-        seq.reserve(n);
+        vector<ull> seq(n);
         map<ull, ull> seq_vals;
-        seq.push_back(a);
-        seq_vals[seq.back()]++;
+        seq[0] = a;
+        seq_vals[a]++;
         if (n > 1)
         {
-            seq.push_back((seq.back() * b + a) % c);
-            seq_vals[seq.back()]++;
+            seq[1] = (seq[0] * b + a) % c;
+            seq_vals[seq[1]]++;
             ull tortoise = 0;
             ull hare = 1;
             while (seq[tortoise] != seq[hare] && hare < n - 1)
             {
                 tortoise++;
                 hare++;
-                seq.push_back((seq.back() * b + a) % c);
-                seq_vals[seq.back()]++;
+                seq[hare] = (seq[hare - 1] * b + a) % c;
+                seq_vals[seq[hare]]++;
                 if (hare == n - 1)
                 {
                     break;
                 }
                 hare++;
-                seq.push_back((seq.back() * b + a) % c);
-                seq_vals[seq.back()]++;
+                seq[hare] = (seq[hare - 1] * b + a) % c;
+                seq_vals[seq[hare]]++;
             }
             ull pre_period = tortoise;
             ull period = hare - tortoise;
             if (hare < n - 1)
             { //periodic
-                ull fuull_cycles = ((n - 1 - pre_period) / period) - 1;
+                ull full_cycles = ((n - 1 - pre_period) / period) - 1;
                 ull remainder = (n - 1 - pre_period) % period;
                 for (int i = 1; i <= period; i++)
                 {
-                    seq_vals[seq[pre_period + i]] += fuull_cycles;
+                    seq_vals[seq[pre_period + i]] += full_cycles;
                 }
                 for (int i = 1; i <= remainder; i++)
                 {
@@ -71,12 +70,43 @@ int main()
                 }
             }
         }
-        ull v=0;
-        for (auto it = seq_vals.rbegin(); it != seq_vals.rend(); it++)
+        ull v = 0;
+        for (auto it = seq_vals.begin(); it != seq_vals.end(); it++)
         {
-            while ((*it).second--)
+            vector<ull> v_seq((*it).second + 1);
+            v_seq[0] = v;
+            v_seq[1] = (v_seq[0] * x + (*it).first) % y;
+            if ((*it).second > 1)
             {
-                v = (v * x + (*it).first) % y;
+                ull tortoise = 0;
+                ull hare = 1;
+                while (v_seq[tortoise] != v_seq[hare] && hare < (*it).second)
+                {
+                    tortoise++;
+                    hare++;
+                    v_seq[hare] = (v_seq[hare - 1] * x + (*it).first) % y;
+                    if (hare == (*it).second)
+                    {
+                        break;
+                    }
+                    hare++;
+                    v_seq[hare] = (v_seq[hare - 1] * x + (*it).first) % y;
+                }
+                if (hare < (*it).second)
+                { //periodic
+                    ull pre_period = tortoise;
+                    ull period = hare - tortoise;
+                    ull remainder = ((*it).second - pre_period) % period;
+                    v = v_seq[pre_period + remainder];
+                }
+                else
+                {
+                    v = v_seq.back();
+                }
+            }
+            else
+            {
+                v = v_seq.back();
             }
         }
         cout << v << "\n";
