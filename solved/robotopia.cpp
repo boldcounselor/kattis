@@ -16,6 +16,18 @@ typedef unsigned long long int ull;
 typedef long double ld;
 //template ends
 using namespace std;
+int gcd(int a, int b, int& x, int& y) {
+    if (b == 0) {
+        x = 1;
+        y = 0;
+        return a;
+    }
+    int x1, y1;
+    int d = gcd(b, a % b, x1, y1);
+    x = y1;
+    y = x1 - y1 * (a / b);
+    return d;
+}
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -35,8 +47,7 @@ int main()
             {                                //i.e. det of (col 1 result) =0 ==> linear dependence ==> infinite solutions
                 if (lt % __gcd(l1, l2) == 0) //does any integer solution exist to diophantine eqn?
                 {
-                    //brute force to find all positive solns to diophantine eqn.
-                    //possible cos its bounded (?) ig lmfao idk
+                    //brute force to find all positive solns to diophantine eqn because i honestly cant be arsed to read up on diophantine eqns lmao
                     ll no_solns = 0;
                     ll r1;
                     ll r1_it = 1;
